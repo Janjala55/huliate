@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 64" width="320" height="64" role="img" aria-label="Nourish &amp; Pure">
+  <defs>
+    <style>
+      .np-logo-text { font-family: 'Fraunces', 'Playfair Display', Georgia, serif; font-size: 26px; font-weight: 700; fill: #1E221E; letter-spacing: -0.5px; }
+      .np-logo-amp { font-family: 'Fraunces', 'Playfair Display', Georgia, serif; font-size: 24px; font-style: italic; fill: #C27852; }
+      .np-logo-sub { font-family: 'Plus Jakarta Sans', -apple-system, sans-serif; font-size: 8.5px; font-weight: 600; letter-spacing: 2.5px; fill: #44624A; text-transform: uppercase; }
+      .np-leaf { fill: #44624A; }
+    </style>
+  </defs>
+  <!-- Botanical Leaf Icon -->
+  <g transform="translate(10, 14)">
+    <path class="np-leaf" d="M16 2 C25 6, 28 18, 20 28 C16 33, 10 34, 4 33 C3 26, 6 18, 12 10 C13.5 8, 15 5, 16 2 Z" opacity="0.9" />
+    <path d="M7 29 C12 21, 16 12, 19 4" stroke="#FBF9F5" stroke-width="1.5" stroke-linecap="round" fill="none" />
+  </g>
+  <!-- Wordmark -->
+  <text x="50" y="34" class="np-logo-text">NOURISH <tspan class="np-logo-amp">&amp;</tspan> PURE</text>
+  <text x="52" y="48" class="np-logo-sub">JOURNAL OF FOOD &amp; DRINK</text>
+</svg>

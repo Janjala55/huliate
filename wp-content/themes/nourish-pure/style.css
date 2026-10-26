@@ -1,0 +1,103 @@
+/*
+Theme Name: Nourish & Pure
+Theme URI: https://github.com/nourish-pure/nourish-pure
+Author: Nourish & Pure Editorial Architecture
+Author URI: https://github.com/nourish-pure
+Description: A modern, high-performance Full Site Editing (FSE) block theme crafted for food, beverage, cooking, and culinary education publications. Featuring refined editorial serif typography, warm alabaster surfaces, responsive article cards, recipe formatting, and built-in monetization touchpoints.
+Version: 1.0.0
+Requires at least: 6.2
+Tested up to: 6.7
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: nourish-pure
+Tags: block-patterns, full-site-editing, wide-blocks, custom-colors, custom-typography, blog, news, food-and-drink, one-column, two-columns, grid-layout, accessibility-ready, editor-style
+*/
+
+/*
+ * Base Theme Overrides & Accessibility Fallbacks
+ * ----------------------------------------------------------------------------
+ * Most visual presentation is managed via theme.json and WordPress Global Styles.
+ * The rules below supply essential functional styles, focus management,
+ * print formatting, and overflow safeguards.
+ */
+
+/* Accessibility: Skip Link Focus State */
+.skip-link {
+    position: absolute;
+    top: -9999px;
+    left: 1rem;
+    z-index: 100000;
+    padding: 0.75rem 1.25rem;
+    background-color: var(--wp--preset--color--primary-accent, #44624a);
+    color: var(--wp--preset--color--base, #ffffff);
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 4px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.skip-link:focus {
+    top: 1rem;
+    outline: 2px solid var(--wp--preset--color--secondary-accent, #c27852);
+    outline-offset: 2px;
+}
+
+/* Ensure focus states meet WCAG 2.2 criteria */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--wp--preset--color--primary-accent, #44624a) !important;
+    outline-offset: 3px !important;
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* Print Stylesheet for Recipes & Articles */
+@media print {
+    .wp-site-blocks > header,
+    .wp-site-blocks > footer,
+    .np-reading-progress,
+    .np-mobile-share-bar,
+    .np-ad-container,
+    .np-social-share-bar,
+    .np-newsletter-callout {
+        display: none !important;
+    }
+
+    body {
+        background: #ffffff !important;
+        color: #000000 !important;
+        font-size: 12pt !important;
+        line-height: 1.5 !important;
+    }
+
+    a {
+        text-decoration: none !important;
+        color: #000000 !important;
+    }
+
+    .wp-block-post-featured-image img {
+        max-height: 300px !important;
+        object-fit: cover !important;
+    }
+
+    .np-recipe-card {
+        border: 1pt solid #cccccc !important;
+        padding: 15pt !important;
+        page-break-inside: avoid !important;
+    }
+}

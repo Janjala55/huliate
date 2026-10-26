@@ -1,0 +1,16 @@
+{
+  "name": "huliate",
+  "version": "1.0.0",
+  "description": "Huliate - Evidence-Based Nutrition, High-Fiber Habits & Wholesome Meal Prep",
+  "scripts": {
+    "export": "node scripts/export-static.mjs",
+    "build": "node scripts/export-static.mjs"
+  },
+  "keywords": [
+    "wordpress",
+    "huliate",
+    "cloudflare-pages"
+  ],
+  "author": "Janjala55",
+  "license": "ISC"
+}

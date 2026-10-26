@@ -1,0 +1,57 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/theme.json",
+  "version": 3,
+  "title": "Clean Minimalist",
+  "settings": {
+    "color": {
+      "palette": [
+        {
+          "slug": "base",
+          "color": "#FFFFFF",
+          "name": "Pure White"
+        },
+        {
+          "slug": "contrast",
+          "color": "#111411",
+          "name": "Obsidian"
+        },
+        {
+          "slug": "secondary-text",
+          "color": "#606460",
+          "name": "Muted Slate"
+        },
+        {
+          "slug": "primary-accent",
+          "color": "#2C4032",
+          "name": "Pine Green"
+        },
+        {
+          "slug": "secondary-accent",
+          "color": "#A85D3B",
+          "name": "Rust Copper"
+        },
+        {
+          "slug": "border",
+          "color": "#E5E5E5",
+          "name": "Clean Neutral Border"
+        },
+        {
+          "slug": "surface",
+          "color": "#FAFAFA",
+          "name": "Off-White Surface"
+        },
+        {
+          "slug": "highlight",
+          "color": "#F4F6F4",
+          "name": "Cool Light Highlight"
+        }
+      ]
+    }
+  },
+  "styles": {
+    "color": {
+      "background": "var(--wp--preset--color--base)",
+      "text": "var(--wp--preset--color--contrast)"
+    }
+  }
+}
