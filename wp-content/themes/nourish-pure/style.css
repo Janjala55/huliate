@@ -103,16 +103,34 @@ select:focus-visible,
 }
 
 /* ==========================================================================
-   Mobile Viewport & Horizontal Overflow Prevention (Anti-Overscroll)
+   Mobile Rigid Anti-Tilt, Anti-Wobble & Anti-Overscroll Guard
    ========================================================================== */
-html,
-body {
+html {
     overflow-x: hidden !important;
-    max-width: 100vw !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
     width: 100% !important;
     position: relative;
     margin: 0;
     padding: 0;
+    overscroll-behavior-x: none !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-y !important;
+    -webkit-text-size-adjust: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    overflow-x: hidden !important;
+    overflow-x: clip !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    position: relative;
+    margin: 0;
+    padding: 0;
+    overscroll-behavior-x: none !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-y !important;
     -webkit-text-size-adjust: 100%;
     overflow-wrap: break-word;
     word-wrap: break-word;
@@ -124,33 +142,75 @@ body {
     box-sizing: border-box !important;
 }
 
+/* Restrict all layout blocks, wrappers, and containers */
+.wp-site-blocks,
+main,
+header,
+footer,
+section,
+article,
+div[class*="wp-block"] {
+    max-width: 100% !important;
+}
+
 .wp-site-blocks {
     overflow-x: hidden !important;
-    max-width: 100% !important;
+    overflow-x: clip !important;
     width: 100% !important;
 }
 
-/* Ensure mobile drawer doesn't create off-screen scrollable negative space when closed */
+/* Neutralize full-width Gutenberg breakouts on mobile devices */
+@media (max-width: 782px) {
+    .alignfull,
+    .alignwide,
+    .wp-block-group.alignfull,
+    .wp-block-cover.alignfull,
+    .wp-block-image.alignfull,
+    .wp-block-columns.alignfull {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+/* Category Strip: allow horizontal swipe gestures only inside this rail */
+.np-category-strip {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    overscroll-behavior-x: contain !important;
+    overscroll-behavior-y: auto !important;
+    touch-action: pan-x !important;
+    -webkit-overflow-scrolling: touch;
+    box-sizing: border-box !important;
+}
+
+/* Reading Progress Bar Bound */
+.np-reading-progress {
+    max-width: 100% !important;
+}
+
+/* Off-canvas mobile drawer isolation */
 .np-mobile-drawer:not(.is-open) {
     display: none !important;
 }
 
 .np-mobile-drawer {
     overflow: hidden !important;
-}
-
-/* Mobile Category Pill Strip */
-.np-category-strip {
     max-width: 100% !important;
-    width: 100% !important;
-    overflow-x: auto !important;
-    -webkit-overflow-scrolling: touch;
-    box-sizing: border-box !important;
 }
 
-/* Hero Section & Card Stack Safeguards */
+.np-drawer-panel {
+    max-width: 85vw !important;
+}
+
+/* Visual elements & cards safeguards */
 .np-hero-visual-col,
-.np-hero-card-stack {
+.np-hero-card-stack,
+.np-card-featured,
+.np-article-card {
     max-width: 100% !important;
     overflow: hidden;
 }
@@ -160,10 +220,12 @@ body {
     .np-chip-top {
         left: 10px !important;
         top: 10px !important;
+        max-width: calc(100% - 20px) !important;
     }
     .np-chip-bottom {
         right: 10px !important;
         bottom: 10px !important;
+        max-width: calc(100% - 20px) !important;
     }
 }
 
@@ -172,7 +234,8 @@ img,
 video,
 iframe,
 embed,
-object {
+object,
+svg {
     max-width: 100% !important;
     height: auto;
 }
@@ -198,6 +261,8 @@ code {
 @media (max-width: 781px) {
     .wp-block-columns {
         flex-wrap: wrap !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
     }
     .wp-block-column {
         flex-basis: 100% !important;
