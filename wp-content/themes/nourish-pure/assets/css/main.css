@@ -1523,7 +1523,7 @@ header.wp-block-template-part {
 }
 
 .np-site-footer a {
-    color: #c9ccc8;
+    color: #f0f2eb;
 }
 
 .np-site-footer a:hover {
@@ -2312,7 +2312,7 @@ header.wp-block-template-part {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: #8deb8d;
+    color: #bdf5bd;
     margin-bottom: 0.75rem;
 }
 
@@ -3055,4 +3055,10 @@ code {
         min-width: 0 !important;
         max-width: 100% !important;
     }
+}
+
+.np-site-footer a, .np-header-nav a, .np-cat-pill, .np-dish-link, .np-retention-link {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
 }
