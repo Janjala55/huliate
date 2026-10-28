@@ -96,7 +96,7 @@ $hero_img = content_url( '/uploads/2026/10/gentle-gut-reset-fiber-portrait.jpg' 
 			<div class="np-retention-card">
 				<div class="np-retention-icon-box">🌿</div>
 				<div class="np-retention-text">
-					<h3 class="np-retention-card-title">Debloat &amp; Heal Your Gut</h3>
+					<h2 class="np-retention-card-title">Debloat &amp; Heal Your Gut</h2>
 					<p class="np-retention-card-desc">How 35g of soluble prebiotic fiber calms digestive distension within 7 days.</p>
 					<a href="/35g-daily-fiber-blueprint/" class="np-retention-link">Read Blueprint &rarr;</a>
 				</div>
@@ -105,7 +105,7 @@ $hero_img = content_url( '/uploads/2026/10/gentle-gut-reset-fiber-portrait.jpg' 
 			<div class="np-retention-card">
 				<div class="np-retention-icon-box">🥗</div>
 				<div class="np-retention-text">
-					<h3 class="np-retention-card-title">The 3-2-1 Sunday Prep</h3>
+					<h2 class="np-retention-card-title">The 3-2-1 Sunday Prep</h2>
 					<p class="np-retention-card-desc">Cook once in 60 minutes. Enjoy 5 balanced 15-minute weekday lunches without food waste.</p>
 					<a href="/3-2-1-meal-prep-formula/" class="np-retention-link">See Formula &rarr;</a>
 				</div>
@@ -114,7 +114,7 @@ $hero_img = content_url( '/uploads/2026/10/gentle-gut-reset-fiber-portrait.jpg' 
 			<div class="np-retention-card">
 				<div class="np-retention-icon-box">📉</div>
 				<div class="np-retention-text">
-					<h3 class="np-retention-card-title">Steady Blood Sugar Curves</h3>
+					<h2 class="np-retention-card-title">Steady Blood Sugar Curves</h2>
 					<p class="np-retention-card-desc">Eat fiber &amp; protein first to blunt glucose spikes by up to 35% and stop the 3 PM crash.</p>
 					<a href="/blood-sugar-balanced-plate/" class="np-retention-link">Learn Plating &rarr;</a>
 				</div>

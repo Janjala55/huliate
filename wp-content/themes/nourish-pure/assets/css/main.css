@@ -147,7 +147,7 @@ header.wp-block-template-part {
 }
 
 .np-top-divider {
-    color: #c9d8c9;
+    color: #2e4a34;
     font-size: 0.8rem;
     user-select: none;
 }
@@ -451,7 +451,7 @@ header.wp-block-template-part {
     position: absolute;
     top: -5px;
     right: -5px;
-    background: var(--wp--preset--color--secondary-accent, #c27852);
+    background: #964823;
     color: #ffffff;
     font-size: 0.65rem;
     font-weight: 700;
@@ -1732,7 +1732,7 @@ header.wp-block-template-part {
 }
 
 .np-trust-divider {
-    color: #c9d8c9;
+    color: #2e4a34;
 }
 
 /* Hero Right Column: Card with Floating Chips */
@@ -2392,7 +2392,7 @@ header.wp-block-template-part {
     font-family: var(--wp--preset--font-family--serif, Georgia, serif);
     font-size: 1.15rem;
     font-weight: 800;
-    color: #c9d8c9;
+    color: #2e4a34;
 }
 
 .np-step-icon {

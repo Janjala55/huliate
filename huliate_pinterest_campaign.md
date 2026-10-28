@@ -46,6 +46,36 @@ pie title Pin Distribution (55 Pins Total)
 
 ---
 
+## 🍳 Recipe Rich Pins Architecture (Schema.org JSON-LD & Dynamic Badges)
+
+To match top-ranking authority food pins on Pinterest (such as Dishing Out Health), every pin and target article on Huliate.com implements **Recipe Rich Pins** powered by Schema.org `Recipe` JSON-LD:
+
+### 1. Dynamic Visual Badges Displayed on Pinterest
+- ⏱️ **Cooking / Preparation Time Badge:** Extracted from `totalTime` (e.g. `45m`, `15m`, `10m`, `20m`, `25m`, `5m`)
+- ⭐ **Star Rating & Social Proof:** Extracted from `aggregateRating` (`4.9 ★` with 31–84 verified ratings)
+- 👥 **Yield / Servings Badge:** Extracted from `recipeYield` (e.g. `5 servings`, `4 servings`, `2 servings`)
+- 🥗 **Dietary Badges:** Extracted from `suitableForDiet` (e.g. `Gluten free`, `Vegetarian`, `Vegan`, `Low calorie`)
+- 🛒 **Interactive Ingredient Checklist:** Pinterest automatically parses `recipeIngredient` into grocery aisles (Produce, Pantry, Condiments, Oils) right below the pin image
+- 🔗 **Direct Rich "Visit site" Button:** Directly routes users to the recipe on Huliate.com
+
+### 2. Tailored Metadata per Blog Post
+
+| Article / Recipe | Total Time | Rating | Servings | Diets |
+|---|---|---|---|---|
+| **The 3-2-1 Meal Prep Formula** | `45m` | `4.9 ★ (48)` | 5 Servings | Gluten-Free |
+| **30g Protein, 10g Fiber Breakfast** | `15m` | `4.9 ★ (58)` | 1 Serving | Vegetarian, Gluten-Free |
+| **Blood Sugar Balanced Plate** | `25m` | `4.9 ★ (42)` | 2 Servings | Gluten-Free |
+| **Meal Prep Soggy Separation** | `20m` | `4.9 ★ (31)` | 4 Servings | Meal Prep, Gluten-Free |
+| **12 Pantry Staples Under $5** | `20m` | `4.9 ★ (60)` | 3 Servings | Budget Superfood, Gluten-Free |
+| **The 35g Daily Fiber Blueprint** | `15m` | `4.9 ★ (66)` | 1 Serving | High-Fiber, Gluten-Free |
+| **10-Min Blistered Cabbage Skillet** | `10m` | `4.9 ★ (75)` | 3 Servings | Vegan, Gluten-Free |
+| **The Gentle Gut Reset** | `20m` | `4.9 ★ (51)` | 2 Servings | Gut-Healing, Vegan |
+| **The Low-FODMAP Trap** | `30m` | `4.8 ★ (35)` | 4 Servings | Microbiome Rebuild, Gluten-Free |
+| **The Resistant Starch Method** | `25m` | `4.9 ★ (57)` | 4 Servings | Prebiotic Resistant Starch, Vegan |
+| **Why Fiber Causes Cramps (Water Rule)**| `5m` | `4.9 ★ (84)` | 1 Serving | Motility Tonic, High-Hydration |
+
+---
+
 ## 📁 Boards Targeted on @Huliate88
 
 1. **`3-2-1 Batch Meal Prep & Balanced Plates`** (ID: `1087408341219223801`)
