@@ -91,3 +91,11 @@ function nourish_pure_enqueue_scripts() {
 	}
 }
 add_action( 'wp_enqueue_scripts', 'nourish_pure_enqueue_scripts' );
+
+/**
+ * Add Pinterest Domain Verification Meta Tag
+ */
+function nourish_pure_pinterest_verification_meta() {
+	echo '<meta name="p:domain_verify" content="830795067814d81fba015766519739a5" />' . "\n";
+}
+add_action( 'wp_head', 'nourish_pure_pinterest_verification_meta', 1 );
