@@ -210,6 +210,15 @@ async function run() {
   const headersFile = path.join(DIST_DIR, '_headers');
   fs.writeFileSync(headersFile, `/*\n  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload\n  X-Frame-Options: SAMEORIGIN\n  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n  Cross-Origin-Opener-Policy: same-origin\n  Permissions-Policy: camera=(), microphone=(), geolocation=()\n\n/wp-content/*\n  Cache-Control: public, max-age=31536000, immutable\n\n/assets/*\n  Cache-Control: public, max-age=31536000, immutable\n`, 'utf8');
 
+  // Run SEO, Sitemap, IndexNow, and Robots generation
+  try {
+    const { execSync } = await import('child_process');
+    console.log('\nRunning automated SEO and indexing asset generation...');
+    execSync('node scripts/generate-seo.mjs', { cwd: SITE_ROOT, stdio: 'inherit' });
+  } catch (seoErr) {
+    console.error('Failed to run SEO generator:', seoErr.message);
+  }
+
   console.log('\n--- Export Completed Successfully! ---');
   console.log(`Generated static site in: ${DIST_DIR}`);
 }
