@@ -9,29 +9,27 @@ const DIST_DIR = path.resolve(SITE_ROOT, 'dist');
 const TARGET_DOMAIN = 'https://huliate.com';
 const INDEXNOW_KEY = 'f6c91a3e892d4f57a03bc5e243918b95';
 
-console.log('--- Generating SEO, Sitemaps & Bing/Google Indexing Assets ---');
+console.log('=== Huliate Full SEO, Ranking & Search Indexing Engine ===');
 
 if (!fs.existsSync(DIST_DIR)) {
   fs.mkdirSync(DIST_DIR, { recursive: true });
 }
 
-// 1. Generate IndexNow Verification Files
-const indexNowKeyFile = path.join(DIST_DIR, `${INDEXNOW_KEY}.txt`);
-fs.writeFileSync(indexNowKeyFile, INDEXNOW_KEY, 'utf8');
-const indexNowAliasFile = path.join(DIST_DIR, 'indexnow.txt');
-fs.writeFileSync(indexNowAliasFile, INDEXNOW_KEY, 'utf8');
-console.log(`[SEO] Created IndexNow key verification files: ${INDEXNOW_KEY}.txt & indexnow.txt`);
+// 1. IndexNow Verification Files (Bing & Yandex)
+fs.writeFileSync(path.join(DIST_DIR, `${INDEXNOW_KEY}.txt`), INDEXNOW_KEY, 'utf8');
+fs.writeFileSync(path.join(DIST_DIR, 'indexnow.txt'), INDEXNOW_KEY, 'utf8');
+console.log(`[IndexNow] Key files created: ${INDEXNOW_KEY}.txt & indexnow.txt`);
 
-// 2. Generate BingSiteAuth.xml for Bing Webmaster Tools
+// 2. BingSiteAuth.xml (Bing Webmaster Tools XML verification)
 const bingAuthXml = `<?xml version="1.0"?>
 <users>
 	<user>589DBB2FA1D7159781CD8D9C03B0D238</user>
 </users>
 `;
 fs.writeFileSync(path.join(DIST_DIR, 'BingSiteAuth.xml'), bingAuthXml, 'utf8');
-console.log('[SEO] Created BingSiteAuth.xml');
+console.log('[Bing] BingSiteAuth.xml verification file created');
 
-// 3. Generate production-grade robots.txt
+// 3. Robots.txt (Comprehensive Search Engine & Bot Policy)
 const robotsTxt = `# Robots.txt for Huliate (https://huliate.com)
 # Evidence-Based Nutrition, High-Fiber Habits & Wholesome Meal Prep
 
@@ -49,7 +47,7 @@ Disallow: /wp-signup.php
 Disallow: /comments/feed/
 Disallow: */feed/
 
-# Explicit search engine crawler permissions
+# Explicit search engine crawler allowances
 User-agent: Googlebot
 Allow: /
 
@@ -74,31 +72,84 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# Sitemaps
+# Primary XML Sitemap for Google & Bing
 Sitemap: ${TARGET_DOMAIN}/sitemap.xml
 
 # Canonical Host
 Host: ${TARGET_DOMAIN}
 `;
 fs.writeFileSync(path.join(DIST_DIR, 'robots.txt'), robotsTxt, 'utf8');
-console.log('[SEO] Created robots.txt with Bingbot & Googlebot indexing rules');
+console.log('[Robots] robots.txt created with full crawler access');
 
-// 4. Discover all legitimate public URLs for sitemap.xml
-const today = new Date().toISOString().split('T')[0];
-
-const coreArticles = [
-  'gentle-gut-reset-fiber',
-  '35g-daily-fiber-blueprint',
-  '30g-protein-10g-fiber-breakfast-sequencing',
-  'blood-sugar-balanced-plate',
-  'cabbage-brassica-gut-health-bloating',
-  'why-fiber-worsens-constipation-water-ratio',
-  'resistant-starch-blood-sugar-gut',
-  'low-fodmap-trap-microbiome-reintroduction',
-  '3-2-1-meal-prep-formula',
-  'meal-prep-soggy-ruined-component-method',
-  'nutrient-dense-pantry-staples'
-];
+// 4. Articles metadata map
+const articleData = {
+  'gentle-gut-reset-fiber': {
+    title: 'The Gentle 7-Day Gut Reset: Ramp Up Fiber Without Discomfort',
+    category: 'High-Fiber & Gut Health',
+    catSlug: 'high-fiber-gut-health',
+    image: 'gentle-gut-reset-fiber-1024x572.webp'
+  },
+  '35g-daily-fiber-blueprint': {
+    title: 'The 35g Daily Fiber Blueprint: 10 High-Fiber Foods That Keep You Full Without Bloating',
+    category: 'High-Fiber & Gut Health',
+    catSlug: 'high-fiber-gut-health',
+    image: '35g-daily-fiber-blueprint-1024x572.webp'
+  },
+  '30g-protein-10g-fiber-breakfast-sequencing': {
+    title: '30g Protein + 10g Fiber Breakfasts: Sequencing Your Morning for Stable All-Day Glucose',
+    category: 'Balanced Meals & Prep',
+    catSlug: 'balanced-meals-prep',
+    image: '30g-protein-10g-fiber-breakfast-sequencing-1024x572.webp'
+  },
+  'blood-sugar-balanced-plate': {
+    title: 'The Blood Sugar Balanced Plate: How to Build Every Meal for Steady Energy',
+    category: 'Balanced Meals & Prep',
+    catSlug: 'balanced-meals-prep',
+    image: 'blood-sugar-balanced-plate-1024x572.webp'
+  },
+  'cabbage-brassica-gut-health-bloating': {
+    title: 'Cabbage & Brassicas: Cooking Methods That Maximize Gut Benefits While Minimizing Bloat',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'cabbage-brassica-gut-health-bloating-1024x572.webp'
+  },
+  'why-fiber-worsens-constipation-water-ratio': {
+    title: 'Why More Fiber Can Make Constipation Worse: The Water-to-Bulk Ratio Explained',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'why-fiber-worsens-constipation-water-ratio-1024x572.webp'
+  },
+  'resistant-starch-blood-sugar-gut': {
+    title: 'Resistant Starch 101: How Cooked and Cooled Carbs Lower Blood Sugar Spikes and Feed Good Gut Bacteria',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'resistant-starch-blood-sugar-gut-1024x572.webp'
+  },
+  'low-fodmap-trap-microbiome-reintroduction': {
+    title: 'The Low-FODMAP Trap: Why Long-Term Elimination Starves Your Microbiome and How to Reintroduce Foods',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'low-fodmap-trap-microbiome-reintroduction-1024x572.webp'
+  },
+  '3-2-1-meal-prep-formula': {
+    title: 'The 3-2-1 Meal Prep Formula: 3 Proteins, 2 Carbs, 1 Sauce for Endless Combinations',
+    category: 'Balanced Meals & Prep',
+    catSlug: 'balanced-meals-prep',
+    image: '3-2-1-meal-prep-formula-1024x572.webp'
+  },
+  'meal-prep-soggy-ruined-component-method': {
+    title: 'Why Your Meal Prep Gets Soggy and Ruined by Day 3: The Component Method Fix',
+    category: 'Balanced Meals & Prep',
+    catSlug: 'balanced-meals-prep',
+    image: 'meal-prep-soggy-ruined-component-method-1024x572.webp'
+  },
+  'nutrient-dense-pantry-staples': {
+    title: '12 Nutrient-Dense Pantry Staples That Turn Any Random Dinner Into a Balanced Meal',
+    category: 'Balanced Meals & Prep',
+    catSlug: 'balanced-meals-prep',
+    image: 'nutrient-dense-pantry-staples-1024x572.webp'
+  }
+};
 
 const staticPages = [
   'about',
@@ -126,183 +177,201 @@ const categoryPages = [
   'category/how-its-made'
 ];
 
-const sitemapEntries = [
-  { loc: `${TARGET_DOMAIN}/`, priority: '1.0', changefreq: 'daily', lastmod: today },
-  ...coreArticles.map(slug => ({
-    loc: `${TARGET_DOMAIN}/${slug}/`,
-    priority: '0.9',
-    changefreq: 'weekly',
-    lastmod: today
-  })),
-  ...categoryPages.map(cat => ({
-    loc: `${TARGET_DOMAIN}/${cat}/`,
-    priority: '0.7',
-    changefreq: 'weekly',
-    lastmod: today
-  })),
-  ...staticPages.map(page => ({
-    loc: `${TARGET_DOMAIN}/${page}/`,
-    priority: '0.6',
-    changefreq: 'monthly',
-    lastmod: today
-  }))
-];
+const today = new Date().toISOString().split('T')[0];
 
+// 5. XML Sitemap with Image Sitemap Extensions (Google & Bing Best Practice)
 let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>${TARGET_DOMAIN}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
 `;
 
-for (const entry of sitemapEntries) {
+for (const [slug, meta] of Object.entries(articleData)) {
   sitemapXml += `  <url>
-    <loc>${entry.loc}</loc>
-    <lastmod>${entry.lastmod}</lastmod>
-    <changefreq>${entry.changefreq}</changefreq>
-    <priority>${entry.priority}</priority>
+    <loc>${TARGET_DOMAIN}/${slug}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>${TARGET_DOMAIN}/wp-content/uploads/2026/10/${meta.image}</image:loc>
+      <image:title>${meta.title.replace(/&/g, '&amp;')}</image:title>
+    </image:image>
+  </url>
+`;
+}
+
+for (const cat of categoryPages) {
+  sitemapXml += `  <url>
+    <loc>${TARGET_DOMAIN}/${cat}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+`;
+}
+
+for (const page of staticPages) {
+  sitemapXml += `  <url>
+    <loc>${TARGET_DOMAIN}/${page}/</loc>
+    <lastmod>${today}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
   </url>
 `;
 }
 sitemapXml += `</urlset>\n`;
 
 fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf8');
-console.log(`[SEO] Created sitemap.xml with ${sitemapEntries.length} canonical URLs`);
+console.log(`[Sitemap] sitemap.xml created with image metadata for Google & Bing Image Search`);
 
-// 5. Enhance HTML files with SEO metadata, canonical links, robots tags, and social cards
-function enhanceHtmlFile(filePath, routePath) {
+// 6. Clean RSS Feed for Search Engine Feed Crawlers
+const feedFile = path.join(DIST_DIR, 'feed', 'index.html');
+if (fs.existsSync(feedFile)) {
+  let feedXml = fs.readFileSync(feedFile, 'utf8');
+  feedXml = feedXml.replaceAll('<link></link>', `<link>${TARGET_DOMAIN}</link>`);
+  feedXml = feedXml.replaceAll('<atom:link href="/feed/"', `<atom:link href="${TARGET_DOMAIN}/feed/"`);
+  feedXml = feedXml.replaceAll('http://localhost:8885', TARGET_DOMAIN);
+  feedXml = feedXml.replaceAll('http%3A%2F%2Flocalhost%3A8885', encodeURIComponent(TARGET_DOMAIN));
+
+  // Fix relative item links
+  for (const slug of Object.keys(articleData)) {
+    feedXml = feedXml.replaceAll(`<link>/${slug}/</link>`, `<link>${TARGET_DOMAIN}/${slug}/</link>`);
+    feedXml = feedXml.replaceAll(`<guid isPermaLink="false">/${slug}/</guid>`, `<guid isPermaLink="true">${TARGET_DOMAIN}/${slug}/</guid>`);
+  }
+  fs.writeFileSync(feedFile, feedXml, 'utf8');
+  console.log('[RSS] Repaired /feed/ URLs to full absolute canonical links');
+}
+
+// 7. Cloudflare Pages _headers Optimization
+const headersFile = path.join(DIST_DIR, '_headers');
+const headersContent = `/*
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Cross-Origin-Opener-Policy: same-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/BingSiteAuth.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/*.txt
+  Content-Type: text/plain; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/feed/*
+  Content-Type: application/rss+xml; charset=utf-8
+  Cache-Control: public, max-age=3600
+
+/wp-content/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+`;
+fs.writeFileSync(headersFile, headersContent, 'utf8');
+console.log('[Headers] Updated Cloudflare _headers for optimal search bot caching and MIME types');
+
+// 8. Enhance HTML files with BreadcrumbList & Article Schemas
+for (const [slug, meta] of Object.entries(articleData)) {
+  const filePath = path.join(DIST_DIR, slug, 'index.html');
+  if (!fs.existsSync(filePath)) continue;
+
   let content = fs.readFileSync(filePath, 'utf8');
+  const canonicalUrl = `${TARGET_DOMAIN}/${slug}/`;
 
-  // Replace any lingering localhost mentions
-  content = content.replaceAll('http://localhost:8885', TARGET_DOMAIN);
-  content = content.replaceAll('http%3A%2F%2Flocalhost%3A8885', encodeURIComponent(TARGET_DOMAIN));
-
-  const canonicalUrl = `${TARGET_DOMAIN}${routePath.endsWith('/') ? routePath : routePath + '/'}`;
-
-  // Ensure canonical link exists
-  if (!content.includes('rel="canonical"') && !content.includes("rel='canonical'")) {
-    const canonicalTag = `\n<link rel="canonical" href="${canonicalUrl}" />`;
-    content = content.replace('</head>', `${canonicalTag}\n</head>`);
-  } else {
-    content = content.replace(/<link rel=["']canonical["'][^>]*>/i, `<link rel="canonical" href="${canonicalUrl}" />`);
-  }
-
-  // Ensure meta robots allows indexing
-  if (!content.includes('name="robots"') && !content.includes("name='robots'")) {
-    const robotsMeta = `\n<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`;
-    content = content.replace('</head>', `${robotsMeta}\n</head>`);
-  } else {
-    // Enhance existing robots tag
-    content = content.replace(/<meta name=['"]robots['"] content=['"][^'"]*['"]\s*\/?>/i,
-      `<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`);
-  }
-
-  // Fix relative Open Graph urls and images
-  content = content.replace(/<meta property=["']og:url["'] content=["'](\/[^"']*)["']\s*\/?>/i, (m, p) => {
-    return `<meta property="og:url" content="${TARGET_DOMAIN}${p}">`;
-  });
-  content = content.replace(/<meta property=["']og:image["'] content=["'](\/[^"']*)["']\s*\/?>/i, (m, p) => {
-    return `<meta property="og:image" content="${TARGET_DOMAIN}${p}">`;
-  });
-
-  // Extract meta title & description for Twitter Cards if missing
-  if (!content.includes('name="twitter:card"')) {
-    const titleMatch = content.match(/<title>([^<]+)<\/title>/i);
-    const descMatch = content.match(/<meta name=["']description["'] content=["']([^"']+)["']/i) ||
-                      content.match(/<meta property=["']og:description["'] content=["']([^"']+)["']/i);
-    const imgMatch = content.match(/<meta property=["']og:image["'] content=["']([^"']+)["']/i);
-
-    const titleText = titleMatch ? titleMatch[1].trim() : 'Huliate';
-    const descText = descMatch ? descMatch[1].trim() : 'Evidence-Based Nutrition & High-Fiber Meal Prep';
-    const imgUrl = imgMatch ? imgMatch[1].trim() : `${TARGET_DOMAIN}/wp-content/uploads/2026/10/gentle-gut-reset-fiber-portrait.webp`;
-
-    const twitterTags = `
-<!-- Twitter Card Metadata -->
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="${titleText}">
-<meta name="twitter:description" content="${descText}">
-<meta name="twitter:image" content="${imgUrl}">
-<!-- End Twitter Card Metadata -->`;
-    content = content.replace('</head>', `${twitterTags}\n</head>`);
-  }
-
-  // If homepage, add WebSite structured data and search engine verification tags
-  if (routePath === '/' || routePath === '') {
-    if (!content.includes('msvalidate.01')) {
-      const bingVerifyMeta = `\n<meta name="msvalidate.01" content="589DBB2FA1D7159781CD8D9C03B0D238" />`;
-      content = content.replace('</head>', `${bingVerifyMeta}\n</head>`);
-    }
-
-    if (!content.includes('schema.org') || !content.includes('"@type":"WebSite"')) {
-      const siteSchema = `
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "WebSite",
-      "@id": "${TARGET_DOMAIN}/#website",
-      "url": "${TARGET_DOMAIN}/",
-      "name": "Huliate",
-      "description": "Evidence-Based Nutrition, High-Fiber Habits & Wholesome Meal Prep",
-      "inLanguage": "en-US",
-      "publisher": {
-        "@type": "Organization",
-        "@id": "${TARGET_DOMAIN}/#organization",
-        "name": "Huliate",
-        "url": "${TARGET_DOMAIN}/"
+  // BreadcrumbList JSON-LD
+  const breadcrumbJson = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${TARGET_DOMAIN}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": meta.category,
+        "item": `${TARGET_DOMAIN}/category/${meta.catSlug}/`
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": meta.title,
+        "item": canonicalUrl
       }
-    },
-    {
-      "@type": "Organization",
-      "@id": "${TARGET_DOMAIN}/#organization",
+    ]
+  };
+
+  // Article JSON-LD
+  const descMatch = content.match(/<meta property=["']og:description["'] content=["']([^"']+)["']/i) ||
+                    content.match(/<meta name=["']description["'] content=["']([^"']+)["']/i);
+  const descText = descMatch ? descMatch[1] : meta.title;
+
+  const articleJson = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${canonicalUrl}#article`,
+    "isPartOf": {
+      "@type": "WebSite",
+      "@id": `${TARGET_DOMAIN}/#website`,
       "name": "Huliate",
-      "url": "${TARGET_DOMAIN}/",
+      "url": `${TARGET_DOMAIN}/`
+    },
+    "headline": meta.title,
+    "description": descText,
+    "image": `${TARGET_DOMAIN}/wp-content/uploads/2026/10/${meta.image}`,
+    "mainEntityOfPage": canonicalUrl,
+    "inLanguage": "en-US",
+    "author": {
+      "@type": "Organization",
+      "@id": `${TARGET_DOMAIN}/#organization`,
+      "name": "Huliate Nutrition Science Team",
+      "url": `${TARGET_DOMAIN}/about/`
+    },
+    "publisher": {
+      "@type": "Organization",
+      "@id": `${TARGET_DOMAIN}/#organization`,
+      "name": "Huliate",
+      "url": `${TARGET_DOMAIN}/`,
       "logo": {
         "@type": "ImageObject",
-        "url": "${TARGET_DOMAIN}/wp-content/uploads/2026/10/gentle-gut-reset-fiber-portrait.webp"
+        "url": `${TARGET_DOMAIN}/wp-content/uploads/2026/10/gentle-gut-reset-fiber-portrait.webp`
       }
     }
-  ]
-}
-</script>`;
-      content = content.replace('</head>', `${siteSchema}\n</head>`);
-    }
+  };
+
+  // Inject BreadcrumbList if not present
+  if (!content.includes('"@type": "BreadcrumbList"') && !content.includes('"@type":"BreadcrumbList"')) {
+    const breadcrumbTag = `\n<script type="application/ld+json" id="huliate-breadcrumbs">\n${JSON.stringify(breadcrumbJson, null, 2)}\n</script>`;
+    content = content.replace('</head>', `${breadcrumbTag}\n</head>`);
+  }
+
+  // Inject Article if not present
+  if (!content.includes('"@type": "Article"') && !content.includes('"@type":"Article"')) {
+    const articleTag = `\n<script type="application/ld+json" id="huliate-article-schema">\n${JSON.stringify(articleJson, null, 2)}\n</script>`;
+    content = content.replace('</head>', `${articleTag}\n</head>`);
   }
 
   fs.writeFileSync(filePath, content, 'utf8');
 }
+console.log('[Schema] Injected BreadcrumbList and Article structured data into all 11 articles');
 
-// Enhance homepage
-const homeFile = path.join(DIST_DIR, 'index.html');
-if (fs.existsSync(homeFile)) {
-  enhanceHtmlFile(homeFile, '/');
-  console.log('[SEO] Enhanced homepage index.html with canonical, robots, and JSON-LD schema');
-}
-
-// Enhance articles and pages
-for (const slug of coreArticles) {
-  const articleFile = path.join(DIST_DIR, slug, 'index.html');
-  if (fs.existsSync(articleFile)) {
-    enhanceHtmlFile(articleFile, `/${slug}/`);
-  }
-}
-console.log(`[SEO] Enhanced ${coreArticles.length} core article HTML files`);
-
-for (const slug of staticPages) {
-  const pageFile = path.join(DIST_DIR, slug, 'index.html');
-  if (fs.existsSync(pageFile)) {
-    enhanceHtmlFile(pageFile, `/${slug}/`);
-  }
-}
-console.log(`[SEO] Enhanced ${staticPages.length} static page HTML files`);
-
-for (const cat of categoryPages) {
-  const catFile = path.join(DIST_DIR, cat, 'index.html');
-  if (fs.existsSync(catFile)) {
-    enhanceHtmlFile(catFile, `/${cat}/`);
-  }
-}
-console.log(`[SEO] Enhanced ${categoryPages.length} category HTML files`);
-
-console.log('--- SEO & Indexing Asset Generation Completed Successfully! ---');
+console.log('=== All SEO, Ranking & Verification Assets Successfully Synchronized ===');

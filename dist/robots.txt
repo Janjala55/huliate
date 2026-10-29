@@ -15,7 +15,7 @@ Disallow: /wp-signup.php
 Disallow: /comments/feed/
 Disallow: */feed/
 
-# Explicit search engine crawler permissions
+# Explicit search engine crawler allowances
 User-agent: Googlebot
 Allow: /
 
@@ -40,7 +40,7 @@ Allow: /
 User-agent: YandexBot
 Allow: /
 
-# Sitemaps
+# Primary XML Sitemap for Google & Bing
 Sitemap: https://huliate.com/sitemap.xml
 
 # Canonical Host

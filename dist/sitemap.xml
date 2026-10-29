@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
-        http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://huliate.com/</loc>
     <lastmod>2026-10-29</lastmod>
@@ -14,66 +12,110 @@
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/gentle-gut-reset-fiber-1024x572.webp</image:loc>
+      <image:title>The Gentle 7-Day Gut Reset: Ramp Up Fiber Without Discomfort</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/35g-daily-fiber-blueprint/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/35g-daily-fiber-blueprint-1024x572.webp</image:loc>
+      <image:title>The 35g Daily Fiber Blueprint: 10 High-Fiber Foods That Keep You Full Without Bloating</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/30g-protein-10g-fiber-breakfast-sequencing/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/30g-protein-10g-fiber-breakfast-sequencing-1024x572.webp</image:loc>
+      <image:title>30g Protein + 10g Fiber Breakfasts: Sequencing Your Morning for Stable All-Day Glucose</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/blood-sugar-balanced-plate/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/blood-sugar-balanced-plate-1024x572.webp</image:loc>
+      <image:title>The Blood Sugar Balanced Plate: How to Build Every Meal for Steady Energy</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/cabbage-brassica-gut-health-bloating/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/cabbage-brassica-gut-health-bloating-1024x572.webp</image:loc>
+      <image:title>Cabbage &amp; Brassicas: Cooking Methods That Maximize Gut Benefits While Minimizing Bloat</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/why-fiber-worsens-constipation-water-ratio/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/why-fiber-worsens-constipation-water-ratio-1024x572.webp</image:loc>
+      <image:title>Why More Fiber Can Make Constipation Worse: The Water-to-Bulk Ratio Explained</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/resistant-starch-blood-sugar-gut/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/resistant-starch-blood-sugar-gut-1024x572.webp</image:loc>
+      <image:title>Resistant Starch 101: How Cooked and Cooled Carbs Lower Blood Sugar Spikes and Feed Good Gut Bacteria</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/low-fodmap-trap-microbiome-reintroduction/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/low-fodmap-trap-microbiome-reintroduction-1024x572.webp</image:loc>
+      <image:title>The Low-FODMAP Trap: Why Long-Term Elimination Starves Your Microbiome and How to Reintroduce Foods</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/3-2-1-meal-prep-formula/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/3-2-1-meal-prep-formula-1024x572.webp</image:loc>
+      <image:title>The 3-2-1 Meal Prep Formula: 3 Proteins, 2 Carbs, 1 Sauce for Endless Combinations</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/meal-prep-soggy-ruined-component-method/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/meal-prep-soggy-ruined-component-method-1024x572.webp</image:loc>
+      <image:title>Why Your Meal Prep Gets Soggy and Ruined by Day 3: The Component Method Fix</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/nutrient-dense-pantry-staples/</loc>
     <lastmod>2026-10-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://huliate.com/wp-content/uploads/2026/10/nutrient-dense-pantry-staples-1024x572.webp</image:loc>
+      <image:title>12 Nutrient-Dense Pantry Staples That Turn Any Random Dinner Into a Balanced Meal</image:title>
+    </image:image>
   </url>
   <url>
     <loc>https://huliate.com/category/high-fiber-gut-health/</loc>
