@@ -162,24 +162,10 @@ const staticPages = [
   'terms'
 ];
 
-const categoryPages = [
-  'category/high-fiber-gut-health',
-  'category/balanced-meals-prep',
-  'category/food-science',
-  'category/recipes',
-  'category/meal-plans',
-  'category/food-guides',
-  'category/nutritious-ingredients',
-  'category/nutrition-education',
-  'category/reviews',
-  'category/baking',
-  'category/drinks',
-  'category/how-its-made'
-];
-
 const today = new Date().toISOString().split('T')[0];
 
 // 5. XML Sitemap with Image Sitemap Extensions (Google & Bing Best Practice)
+// Fix 2: Clean sitemap.xml by purging all empty category pages, keeping only rich articles, homepage, and key policy pages.
 let sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
@@ -205,16 +191,6 @@ for (const [slug, meta] of Object.entries(articleData)) {
 `;
 }
 
-for (const cat of categoryPages) {
-  sitemapXml += `  <url>
-    <loc>${TARGET_DOMAIN}/${cat}/</loc>
-    <lastmod>${today}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-`;
-}
-
 for (const page of staticPages) {
   sitemapXml += `  <url>
     <loc>${TARGET_DOMAIN}/${page}/</loc>
@@ -227,7 +203,7 @@ for (const page of staticPages) {
 sitemapXml += `</urlset>\n`;
 
 fs.writeFileSync(path.join(DIST_DIR, 'sitemap.xml'), sitemapXml, 'utf8');
-console.log(`[Sitemap] sitemap.xml created with image metadata for Google & Bing Image Search`);
+console.log(`[Sitemap] Clean sitemap.xml created without empty category pages`);
 
 // 6. Clean RSS Feed for Search Engine Feed Crawlers
 const feedFile = path.join(DIST_DIR, 'feed', 'index.html');
@@ -286,13 +262,52 @@ const headersContent = `/*
 fs.writeFileSync(headersFile, headersContent, 'utf8');
 console.log('[Headers] Updated Cloudflare _headers for optimal search bot caching and MIME types');
 
-// 8. Enhance HTML files with BreadcrumbList & Article Schemas
+// 8. Enhance HTML files with BreadcrumbList, Article Schemas, Meta Description, Title Entity Decoding, and YMYL Disclaimer
+const disclaimerHtml = `
+			<div class="huliate-ymyl-disclaimer" style="margin:2.5rem 0 2rem 0;padding:1.25rem 1.5rem;background:#f9f9f6;border-left:4px solid #3c5a3e;border-radius:4px;font-size:0.875rem;line-height:1.6;color:#4a5568;">
+			  <p style="margin:0 0 0.5rem 0;font-weight:700;color:#2d3748;display:flex;align-items:center;gap:0.5rem;">
+			    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#3c5a3e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+			    Medical &amp; Nutritional Disclaimer
+			  </p>
+			  <p style="margin:0;">The dietary, recipe, and nutritional information on Huliate is published strictly for educational and informational purposes and does not constitute individual medical or nutritional advice. Always consult a qualified physician, registered dietitian, or licensed healthcare provider before making significant dietary changes or managing chronic health conditions.</p>
+			</div>`;
+
 for (const [slug, meta] of Object.entries(articleData)) {
   const filePath = path.join(DIST_DIR, slug, 'index.html');
   if (!fs.existsSync(filePath)) continue;
 
   let content = fs.readFileSync(filePath, 'utf8');
   const canonicalUrl = `${TARGET_DOMAIN}/${slug}/`;
+
+  // Fix 3: Decode HTML entities in <title> tags (replace raw &#8211; with en dash and &amp; with &)
+  content = content.replace(/<title>(.*?)<\/title>/is, (match, titleContent) => {
+    let cleanTitle = titleContent.replaceAll('&#8211;', '–').replaceAll('&#038;', '&').replaceAll('&amp;', '&');
+    return `<title>${cleanTitle}</title>`;
+  });
+
+  // Extract description from excerpt or og:description
+  const descMatch = content.match(/<meta property=["']og:description["'] content=["']([^"']+)["']/i) ||
+                    content.match(/<meta name=["']description["'] content=["']([^"']+)["']/i);
+  const descText = descMatch ? descMatch[1] : meta.title;
+
+  // Fix 1: Restore standard <meta name="description" content="..."> tag
+  if (!content.includes('<meta name="description"') && !content.includes("<meta name='description'")) {
+    const metaDescTag = `<meta name="description" content="${descText}" />\n`;
+    if (content.includes('<meta property="og:description"')) {
+      content = content.replace('<meta property="og:description"', `${metaDescTag}<meta property="og:description"`);
+    } else {
+      content = content.replace('</head>', `${metaDescTag}</head>`);
+    }
+  }
+
+  // Fix 4: Add Medical/Nutritional Disclaimer box to article templates for Google YMYL trust
+  if (!content.includes('huliate-ymyl-disclaimer')) {
+    if (content.includes('class="wp-block-group np-author-box')) {
+      content = content.replace('<div class="wp-block-group np-author-box', `${disclaimerHtml}\n\n\t\t\t<div class="wp-block-group np-author-box`);
+    } else if (content.includes('</article>')) {
+      content = content.replace('</article>', `${disclaimerHtml}\n</article>`);
+    }
+  }
 
   // BreadcrumbList JSON-LD
   const breadcrumbJson = {
@@ -321,10 +336,6 @@ for (const [slug, meta] of Object.entries(articleData)) {
   };
 
   // Article JSON-LD
-  const descMatch = content.match(/<meta property=["']og:description["'] content=["']([^"']+)["']/i) ||
-                    content.match(/<meta name=["']description["'] content=["']([^"']+)["']/i);
-  const descText = descMatch ? descMatch[1] : meta.title;
-
   const articleJson = {
     "@context": "https://schema.org",
     "@type": "Article",
@@ -372,6 +383,22 @@ for (const [slug, meta] of Object.entries(articleData)) {
 
   fs.writeFileSync(filePath, content, 'utf8');
 }
-console.log('[Schema] Injected BreadcrumbList and Article structured data into all 11 articles');
+console.log('[Schema & Content] Injected BreadcrumbList, Article schema, meta description, decoded title, and YMYL disclaimer into all 11 articles');
+
+// Decode HTML entities in <title> tags for static pages
+const otherPages = ['', 'about', 'contact', 'newsletter', 'meal-plans-cookbooks', 'editorial-policy', 'affiliate-disclosure', 'privacy-policy', 'terms'];
+for (const p of otherPages) {
+  const pPath = p === '' ? path.join(DIST_DIR, 'index.html') : path.join(DIST_DIR, p, 'index.html');
+  if (fs.existsSync(pPath)) {
+    let pContent = fs.readFileSync(pPath, 'utf8');
+    pContent = pContent.replace(/<title>(.*?)<\/title>/is, (match, titleContent) => {
+      let cleanTitle = titleContent.replaceAll('&#8211;', '–').replaceAll('&#038;', '&').replaceAll('&amp;', '&');
+      return `<title>${cleanTitle}</title>`;
+    });
+    fs.writeFileSync(pPath, pContent, 'utf8');
+  }
+}
+console.log('[Titles] Decoded HTML entities in static pages <title> tags');
 
 console.log('=== All SEO, Ranking & Verification Assets Successfully Synchronized ===');
+
