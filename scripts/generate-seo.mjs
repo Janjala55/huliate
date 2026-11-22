@@ -148,6 +148,24 @@ const articleData = {
     category: 'Balanced Meals & Prep',
     catSlug: 'balanced-meals-prep',
     image: 'nutrient-dense-pantry-staples-1024x572.webp'
+  },
+  '50g-fiber-daily-meal-plan': {
+    title: 'The 50g Fiber Daily Plan: A Realistic Meal-by-Meal Protocol Without Bloating',
+    category: 'High-Fiber & Gut Health',
+    catSlug: 'high-fiber-gut-health',
+    image: '50g-fiber-daily-meal-plan-1024x572.webp'
+  },
+  'protein-pacing-glucose-curves-meal-order': {
+    title: 'Protein Pacing & Meal Sequencing: Why Food Order Prevents Afternoon Blood Sugar Crashes',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'protein-pacing-glucose-curves-meal-order-1024x572.webp'
+  },
+  'sourdough-fermentation-gut-health-fructans': {
+    title: 'Sourdough Fermentation & Gut Health: How Wild Yeast and Slow Hydration Neutralize Fructans',
+    category: 'Food Science & Digestion',
+    catSlug: 'food-science',
+    image: 'sourdough-hydration-1024x683.webp'
   }
 };
 
